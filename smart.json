@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "bootstrap3-less": {},
+    "livescript": {},
+    "iron-router": {},
+    "accounts-ui-bootstrap-3": {},
+    "spin": {}
+  }
+}

@@ -1,0 +1,22 @@
+.houseThumbs {
+  margin: 0;
+  padding: 0;
+
+  .houseThumb {
+
+    .make-xs-column(4);
+    .make-sm-column(3);
+    .make-md-column(2);
+
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 2px;
+
+    img {
+      .img-responsive;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

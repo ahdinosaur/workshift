@@ -1,0 +1,34 @@
+<template name="home">
+  {{#if house }}
+    {{#with house }}
+      {{> house }}
+    {{/with }}
+  {{else }}
+    {{#with houses }}
+      {{> houses }}
+    {{/with }}
+  {{/if }}
+</template>
+
+<template name="house">
+  <div class="house">
+    <h1><a href="{{pathFor 'house' }}">{{ name }}</a></h1>
+    <p>{{ description }}</p>
+  </div>
+</template>
+
+<template name="houses">
+  <ul class="houseThumbs">
+    {{#each this }}
+      {{> houseThumb }}
+    {{/each }}
+  </ul>
+</template>
+
+<template name="houseThumb">
+  <li class="houseThumb">
+    <a href="{{pathFor 'house'}}">
+      <img src="/images/thumb/{{ _id }}.jpg" />
+    </a>
+  </li>
+</template>
