@@ -1,0 +1,47 @@
+<template name="signoffButton">
+  <li><a href="{{pathFor 'signoff' }}">Sign off a shift</a></li>
+</template>
+
+<template name="signoff">
+  <div class="signoff">
+    <form>
+      <div class="form-group">
+        <label for="workshifter">Workshifter:</label>
+        <select id="workshifter" class="form-control">
+          {{#each users }}
+          <option>{{ profile.name }}</option>
+          {{/each }}
+        </select>
+      </div>
+      {{#if currentUser }} {{else }}
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <label for="verifier">Verifier:</label>
+          <select id="verifier" class="form-control">
+            {{#each users }}
+            <option>{{ profile.name }}</option>
+            {{/each }}
+          </select>
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="verifierPassword">Password:</label>
+          <input id="verifierPassword" type="password" class="form-control" />
+        </div>
+      </div>
+      {{/if }}
+      <div class="row">
+        <div class="form-group col-xs-9">
+          <label for="shift">Shift:</label>
+          <textarea id="shift" rows="3" class="form-control" />
+        </div>
+        <div class="form-group col-xs-3">
+          <label for="shiftHours">Hours:</label>
+          <input id="shiftHours" type="number" class="form-control" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <input class="btn btn-default" type="submit" value="Sign off!" />
+      </div>
+    </form>
+  </div>
+</template>

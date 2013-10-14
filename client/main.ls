@@ -20,7 +20,6 @@ Router.map(->
       }
     ),
     waitOn: Meteor.subscribe('houses'),
-    template: Template.home,
   })
   this.route('houses', {
     path: '/houses',
@@ -28,7 +27,6 @@ Router.map(->
       return Houses.find().fetch()
     ),
     waitOn: Meteor.subscribe('houses'),
-    template: Template.houses,
   })
   this.route('house', {
     path: '/house/:_id',
@@ -36,7 +34,6 @@ Router.map(->
       return self.Houses.findOne(this.params._id)
     ),
     waitOn: Meteor.subscribe('houses'),
-    template: Template.house,
   })
   this.route('workshift', {
     path: '/workshift',
@@ -46,16 +43,23 @@ Router.map(->
       }
     ),
     waitOn: Meteor.subscribe('workshifts'),
-    template: Template.workshift,
+  })
+  this.route('signoff', {
+    path: '/signoff',
+    data: (->
+      return {
+        users: Meteor.users.find()
+      }
+    ),
+    waitOn: Meteor.subscribe('users'),
   })
   this.route('preferences', {
     path: '/preferences',
     data: (->
       return {
-        preferencess: {}
+        preferences: {}
       }
     ),
     #waitOn: Meteor.subscribe('preferencess'),
-    template: Template.preferences,
   })
 )

@@ -17,3 +17,7 @@ if Meteor.isServer
         },
       })
   )
+
+  Meteor.publish('users', ->
+    return Meteor.users.find()
+  )
