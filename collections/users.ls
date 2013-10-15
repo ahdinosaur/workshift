@@ -9,15 +9,19 @@ if Meteor.isServer
   Meteor.startup(->
     if Meteor.users.find().count() == 0
       Accounts.createUser({
-        username: "dinosaur",
-        password: "testme",
+        username: "dinosaur"
+        password: "testme"
         profile: {
-          name: "Michael Williams",
-          house: "clo",
-        },
+          name: "Michael Williams"
+          house: "clo"
+        }
       })
   )
 
-  Meteor.publish('users', ->
-    return Meteor.users.find()
+  Meteor.publish('directory' (options={}) ->
+    Meteor.users.find({}, {
+      fields: {
+        'profile.house': 1
+      }
+    })
   )

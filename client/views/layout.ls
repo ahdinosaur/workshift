@@ -2,8 +2,10 @@ self = this
 
 Handlebars.registerHelper('brand', ->
   user = Meteor.user()
-  if user
-    self.Houses.findOne(user.profile.house).name
-  else
-    self.Coop.name
+  # BEGIN hack
+  if user and user.profile.house
+    house = self.Houses.findOne(user.profile.house)
+    if house then return house.name
+    # END hack
+  return self.Org.abbr
 )

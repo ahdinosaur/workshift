@@ -1,15 +1,3 @@
-<template name="home">
-  {{#if house }}
-    {{#with house }}
-      {{> house }}
-    {{/with }}
-  {{else }}
-    {{#with houses }}
-      {{> houses }}
-    {{/with }}
-  {{/if }}
-</template>
-
 <template name="house">
   <div class="house">
     <h1><a href="{{pathFor 'house' }}">{{ name }}</a></h1>

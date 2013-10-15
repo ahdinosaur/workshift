@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-insecure
 preserve-inputs
 less
 bootstrap3-less
@@ -13,3 +12,4 @@ iron-router
 accounts-ui-bootstrap-3
 spin
 accounts-password
+insecure

@@ -1,65 +1,84 @@
 self = this
 
 Router.configure({
-  layout: 'layout',
-  notFoundTemplate: 'notFound',
-  loadingTemplate: 'loading',
+  layout: 'layout'
+  notFoundTemplate: 'notFound'
+  loadingTemplate: 'loading'
   renderTemplates: {
     'navbar': {to: 'navbar'}
-  },
+  }
 })
 
 Router.map(->
-  this.route('home', {
-    path: '/',
-    data: (->
-      user = Meteor.user()
-      return {
-        house: if user then self.Houses.findOne(user.profile.house) else null,
-        houses: if not user then Houses.find().fetch() else null
-      }
-    ),
-    waitOn: Meteor.subscribe('houses'),
+  @route('home' {
+    path: '/'
+    data: ->
+      self.Houses.find()
+    waitOn: ->
+      Meteor.subscribe('houses')
+    controller: 'HomeController'
+    template: Template.houses
+  }, ->
+    user = Meteor.user()
+    if user
+      house = self.Houses.findOne(user.profile.house)
+      @redirect('house', house)
+    else
+      @render('navbar', { to: 'navbar'})
+      @render()
+  )
+  @route('houses' {
+    path: '/houses'
+    data: ->
+      self.Houses.find()
+    waitOn: ->
+      Meteor.subscribe('houses')
   })
-  this.route('houses', {
-    path: '/houses',
-    data: (->
-      return Houses.find().fetch()
-    ),
-    waitOn: Meteor.subscribe('houses'),
-  })
-  this.route('house', {
-    path: '/house/:_id',
-    data: (->
-      return self.Houses.findOne(this.params._id)
-    ),
-    waitOn: Meteor.subscribe('houses'),
-  })
-  this.route('workshift', {
-    path: '/workshift',
-    data: (->
-      return {
+  @route('workshift' {
+    path: '/workshift'
+    data: ->
+      {
         workshifts: Workshifts.find()
       }
-    ),
-    waitOn: Meteor.subscribe('workshifts'),
+    waitOn: ->
+      Meteor.subscribe('workshifts')
   })
-  this.route('signoff', {
-    path: '/signoff',
-    data: (->
-      return {
+  @route('signoff' {
+    path: '/signoff'
+    data: ->
+      {
         users: Meteor.users.find()
       }
-    ),
-    waitOn: Meteor.subscribe('users'),
+    waitOn: ->
+      Meteor.subscribe('directory')
   })
-  this.route('preferences', {
-    path: '/preferences',
-    data: (->
-      return {
+  @route('house/signoff' {
+    path: '/:_id/signoff'
+    data: ->
+      {
+        users: Meteor.users.find({
+          'profile.house': @params._id
+        })
+      }
+    waitOn: ->
+      Meteor.subscribe('directory')
+    template: Template.signoff
+  })
+  @route('preferences' {
+    path: '/preferences'
+    data: ->
+      {
         preferences: {}
       }
-    ),
-    #waitOn: Meteor.subscribe('preferencess'),
+    #waitOn: Meteor.subscribe('preferencess')
+  })
+
+  # do this route last as it matches the most
+  @route('house' {
+    path: '/:_id'
+    data: ->
+      self.Houses.findOne(@params._id)
+    waitOn: ->
+      Meteor.subscribe('houses')
   })
 )

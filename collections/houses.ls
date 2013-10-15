@@ -73,5 +73,5 @@ if Meteor.isServer
   )
 
   Meteor.publish('houses', ->
-    return self.Houses.find()
+    self.Houses.find()
   )

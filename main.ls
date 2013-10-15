@@ -1,3 +1,4 @@
-@Coop = {
-  name: "Berkeley Student Cooperative",
+@Org = {
+  name: "Berkeley Student Cooperative"
+  abbr: "BSC"
 }
